@@ -55,16 +55,16 @@ function main()
     end
     
     println("Finished loading args")
-
+    date = "2017-11-04"
     if subhour
-        fstt = "matpower/$(dataset_name)/2017-01-01"
+        fstt = "matpower/$(dataset_name)/" * date
         ori_is = HPRUC.read_benchmark(fstt)
         run(`python /data1/jxxiong/hpr_uc.jl/instances/matpower_subhour/dataset_transformer.py --dataset $(dataset_name) --interpolate`, wait=true)
-        fstt = "matpower_subhour/$(dataset_name)/2017-01-01"
+        fstt = "matpower_subhour/$(dataset_name)/" * date
         gap_limit = 1e-2
         two_phase_gap = false
     else
-        fstt = "matpower/$(dataset_name)/2017-01-01"
+        fstt = "matpower/$(dataset_name)/" * date
         gap_limit = 1e-3
         two_phase_gap = true
     end

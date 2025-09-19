@@ -79,10 +79,13 @@ function main()
     end
     println("Finished loading args")
 
+
+    date = "2017-11-04"
+
     ######################## run a simple instance for warm up 
     if use_fom
         @info "Warming up for FOM"
-        fstt = "matpower/case14/2017-01-01"
+        fstt = "matpower/case14/" * date
         ori_is = HPRUC.read_benchmark(fstt, scale=scale)
         ori_model0 = HPRUC.build_model(
             instance=ori_is,
@@ -108,20 +111,20 @@ function main()
 
 
     if subhour
-        fstt = "matpower/$(dataset_name)/2017-01-01"
+        fstt = "matpower/$(dataset_name)/" * date
         ori_is = HPRUC.read_benchmark(fstt)
         run(`python /data1/jxxiong/hpr_uc.jl/instances/matpower_subhour/dataset_transformer.py --dataset $(dataset_name) --interpolate`, wait=true)
-        fstt = "matpower_subhour/$(dataset_name)/2017-01-01"
+        fstt = "matpower_subhour/$(dataset_name)/" * date
         gap_limit = 1e-2
         two_phase_gap = false
     else
-        fstt = "matpower/$(dataset_name)/2017-01-01"
+        fstt = "matpower/$(dataset_name)/" * date
         gap_limit = 1e-3
         two_phase_gap = true
     end
     ori_is = HPRUC.read_benchmark(fstt, scale=scale)
 
-
+    return
 
 
     ########## constructing the model and solve using HPRUC.optimize!
