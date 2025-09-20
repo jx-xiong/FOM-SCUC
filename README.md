@@ -1,4 +1,4 @@
-# FOM MRF for SCUC
+# FOM SF for SCUC
 This repo is mainly developed as an extension of the UnitCommitment.jl [1],[2]
 
 ## Setup
