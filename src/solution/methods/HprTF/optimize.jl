@@ -54,7 +54,7 @@ py"""
 import gurobipy as gp
 import time 
 m = gp.read("fixed.mps")
-m.setParam("Threads", 8)
+m.setParam("Threads", 4)
 m = m.relax()
 start_time = time.time()
 m = m.presolve()
@@ -84,7 +84,7 @@ m.write("tmp.mps")
                 end
                 set_optimizer(tmp_model, Gurobi.Optimizer)
                 set_optimizer_attribute(tmp_model, "OutputFlag", 0)
-                set_optimizer_attribute(tmp_model, "Threads", 8)
+                # set_optimizer_attribute(tmp_model, "Threads", 8)
                 set_optimizer_attribute(tmp_model, "Crossover", 0)
                 set_optimizer_attribute(tmp_model, "FeasibilityTol", 1e-4)
                 set_optimizer_attribute(tmp_model, "OptimalityTol", 1e-4)
@@ -238,7 +238,7 @@ py"""
 import gurobipy as gp
 import time 
 m = gp.read("fixed.mps")
-m.setParam("Threads", 8)
+m.setParam("Threads", 4)
 start_time = time.time()
 m  = m.presolve()
 presolve_time = time.time() - start_time
@@ -361,7 +361,7 @@ function optimize!(model::JuMP.Model, method::HprTF.Method)::Tuple{Float64,Float
                 set_gap(method.gap_limit)
                 max_iter = 5
 
-                if ~(model[:dataset_name] in ["case6470rte", "case9241pegase", "case6495rte"])
+                if true
                     milp_time_total += @elapsed begin
                         JuMP.optimize!(model)
                     end

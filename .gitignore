@@ -43,3 +43,5 @@ instances/_source
 local
 notebooks
 *.mps
+logs/*
+*.txt
